@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attractions & Tours</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pridi:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styles */
+      body {
+        margin: 0;
+        font-family: "Bree Serif", serif;
+        font-size: 22px;
+        background-color: #add8e6;
+        color: #333;
+        transition: background-color 0.5s ease, color 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      a {
+        font-family: "Bree Serif", serif;
+        font-size: 20px;
+        color: black;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        color: black;
+      }
+
+      /* Navbar Styles */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.5s ease;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 15px;
+      }
+
+      .tab {
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .tab:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .active-tab {
+        background: #cce4f7;
+        font-weight: bold;
+      }
+
+      /* Container Styles */
+      .container {
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out;
+        transition: transform 0.3s ease;
+      }
+
+      .container:hover {
+        transform: scale(1.03);
+      }
+
+      h2 {
+        font-family: "Pridi", serif;
+        margin-top: 0;
+        font-size: 1.8em;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      li {
+        margin: 10px 0;
+      }
+
+      /* Footer Styles */
+      footer {
+        width: 100%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        margin-top: auto;
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Dark Mode Adjustments */
+      body.dark-mode {
+        background-color: #2c3e50;
+        color: #f1f1f1;
+      }
+
+      body.dark-mode a {
+        color: #5dade2;
+      }
+
+      body.dark-mode .navbar {
+        background-color: #34495e;
+      }
+
+      body.dark-mode footer {
+        background-color: #34495e;
+        color: #f1f1f1;
+      }
+
+      body.dark-mode .container {
+        background-color: #3b4b5c;
+        color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="time" id="time"></div>
+      <div class="tabs">
+        <a href="/airport.html" class="tab" id="airportTab">Airport</a>
+        <a href="/tours.html" class="tab active-tab" id="toursTab"
+          >Attraction/Tours</a
+        >
+        <a href="/map.html" class="tab" id="mapTab">Map</a>
+      </div>
+      <div class="dark-mode" id="darkModeToggle">🌙</div>
+    </div>
+
+    <!-- Day One Container -->
+    <div class="container">
+      <h2>Day One: National Mall and Nearby Attractions</h2>
+      <ul>
+        <li><strong>Lincoln Memorial</strong></li>
+        <li><strong>Vietnam Veterans Memorial</strong> – A short walk from the Lincoln Memorial.</li>
+        <li><strong>Martin Luther King Jr. Memorial</strong> – Nearby, easily accessible.</li>
+        <li><strong>Washington Monument</strong> – Located at the center of the National Mall.</li>
+        <li><strong>National World War I and II Memorials</strong> – Near the Washington Monument.</li>
+        <li><strong>National Archives Museum</strong> – A short walk east from the Mall.</li>
+        <li><strong>United States Capitol</strong> – Continue east to take a guided tour.</li>
+        <li><strong>The White House</strong> – End the day with a visit to this landmark.</li>
+        <li><strong>Kennedy Center</strong> – Close to the White House, ideal to finish the day.</li>
+      </ul>
+    </div>
+
+    <!-- Day Two Container -->
+    <div class="container">
+      <h2>Day Two: Museums and Cultural Attractions</h2>
+      <ul>
+        <li><strong>Smithsonian National Zoological Park</strong> – Start your day here.</li>
+        <li><strong>National Museum of Natural History</strong> – Located back on the National Mall.</li>
+        <li><strong>National Gallery of Art</strong> – Near the Natural History Museum.</li>
+        <li><strong>Planet Word</strong> – A short walk from the National Gallery.</li>
+        <li><strong>The National Portrait Gallery</strong> – Located nearby.</li>
+        <li><strong>The National Building Museum</strong> – Further away, but manageable.</li>
+        <li><strong>The Wharf</strong> – End your day with dinner and entertainment here.</li>
+        <li><strong>United States Holocaust Memorial Museum</strong> – Optional addition to Day 2.</li>
+        <li><strong>The National Cathedral</strong> – Great if time permits.</li>
+        <li><strong>The National Arboretum</strong> – Perfect if you have additional time.</li>
+      </ul>
+    </div>
+
+    <!-- Tour Links -->
+    <div class="container">
+      <h2>Explore These Tours</h2>
+      <ul>
+        <li>
+          <a
+            href="https://www.trolleytours.com/washington-dc"
+            target="_blank"
+            >Old Town Trolley Tours</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://usaguidedtours.com/dc/washington-dc-day-bus-tours/?srsltid=AfmBOoqtj_NwA0g2fYGU2rH9MmrWpylsuFxtudh4dHTyCPi3vfiV8iV8"
+            target="_blank"
+            >USA Guided Tours – Washington DC Day Bus Tour</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>For 2025 Trip (c)</footer>
+
+    <!-- JavaScript -->
+    <script>
+      const timeDisplay = document.getElementById("time");
+      const darkModeToggle = document.getElementById("darkModeToggle");
+
+      let darkMode = false;
+
+      function updateTime() {
+        const options = {
+          timeZone: "America/New_York",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        timeDisplay.innerText = new Date().toLocaleTimeString("en-US", options);
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+
+      darkModeToggle.addEventListener("click", () => {
+        darkMode = !darkMode;
+        document.body.classList.toggle("dark-mode", darkMode);
+        darkModeToggle.innerText = darkMode ? "☀️" : "🌙";
+      });
+    </script>
+  </body>
+</html>

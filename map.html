@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airport to Hotel Guide</title>
+    <!-- Correct Google Fonts Links -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pridi:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Bree Serif", serif;
+        font-size: 22px;
+        background-color: #add8e6;
+        color: #333;
+        transition: background-color 0.5s ease;
+        scroll-behavior: smooth; /* Smooth scrolling */
+      }
+
+      a {
+        font-family: "Bree Serif", serif;
+        font-size: 22px;
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .tabs {
+        display: flex;
+        gap: 15px;
+      }
+
+      .tab {
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        transition: background 0.3s ease;
+      }
+
+      .tab:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .active-tab {
+        background: #cce4f7;
+        font-weight: bold;
+      }
+
+      .active-tab-map {
+        background: #cce4f7;
+        font-weight: bold;
+      }
+
+      .container {
+        padding: 20px;
+        line-height: 1.6;
+        overflow-y: auto;
+        max-height: calc(100vh - 150px); /* Subtract space for navbar and footer */
+        scrollbar-width: thin; /* For modern browsers */
+        scrollbar-color: #555 #e0e0e0;
+      }
+
+      .container::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .container::-webkit-scrollbar-thumb {
+        background-color: #555;
+        border-radius: 5px;
+      }
+
+      .container::-webkit-scrollbar-track {
+        background: #e0e0e0;
+      }
+
+      h1 {
+        font-family: "Pridi", serif;
+        font-size: 2em;
+        margin-top: 0;
+      }
+
+      footer {
+        width: 100%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+      }
+
+      .dark-mode {
+        margin-left: auto;
+        cursor: pointer;
+        font-size: 1.5em;
+      }
+
+      /* Image and fullscreen styles */
+      .image-container {
+        position: relative;
+        max-width: 100%;
+        margin: 20px 0;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 10px;
+      }
+
+      .image-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+
+      .image-container img:hover {
+        transform: scale(1.05); /* Scale on hover */
+      }
+
+      .image-container .title {
+        text-align: center;
+        font-family: "Pridi", serif;
+        font-size: 1.5em;
+        margin-top: 10px;
+      }
+
+      /* Fullscreen overlay */
+      .fullscreen-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .fullscreen-overlay img {
+        max-width: 90%;
+        max-height: 90%;
+        cursor: zoom-out;
+        transition: transform 0.3s ease;
+      }
+
+      .fullscreen-overlay img:active {
+        transform: scale(1.1); /* Add zoom in effect when clicking */
+      }
+
+      .fullscreen-overlay .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2em;
+        color: white;
+        cursor: pointer;
+      }
+
+      /* Mobile / Desktop adjustments */
+      @media (max-width: 768px) {
+        body {
+          font-size: 18px;
+        }
+
+        .tabs {
+          display: block;
+          text-align: center;
+        }
+
+        .tab {
+          display: block;
+          margin: 10px 0;
+        }
+
+        .image-container img {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="time" id="time"></div>&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="tabs">
+        <a href="/airport.html" class="tab" id="airportTab">Airport</a>
+        <a href="/tours.html" class="tab" id="toursTab">Attraction/Tours</a>
+        <a href="/map.html" class="tab active-tab-map" id="mapTab">Map</a>
+      </div>
+      <div class="dark-mode" id="darkModeToggle">🌙</div>
+    </div>
+
+    <div class="container">
+      <div class="image-container" id="day1Container">
+        <img src="https://cdn.glitch.global/183df503-dbd5-470b-8316-f74b7ee4fac8/IMG_1532.png?v=1736038957497" alt="Day 1 Map" />
+        <div class="title">Day 1: National Mall and Nearby Attractions</div>
+      </div>
+
+      <div class="image-container" id="day2Container">
+        <img src="https://cdn.glitch.global/183df503-dbd5-470b-8316-f74b7ee4fac8/IMG_1531.jpeg?v=1736038972700" alt="Day 2 Map" />
+        <div class="title">Day 2: Museums and Cultural Attractions</div>
+      </div>
+    </div>
+
+    <div class="fullscreen-overlay" id="fullscreenOverlay">
+      <img id="fullscreenImage" src="" alt="Fullscreen Image" />
+      <div class="close-btn" id="closeFullscreen">X</div>
+    </div>
+
+    <footer>For 2025 Trip (c)</footer>
+
+    <script>
+      const timeDisplay = document.getElementById("time");
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const fullscreenOverlay = document.getElementById("fullscreenOverlay");
+      const fullscreenImage = document.getElementById("fullscreenImage");
+      const closeFullscreen = document.getElementById("closeFullscreen");
+      const day1Container = document.getElementById("day1Container");
+      const day2Container = document.getElementById("day2Container");
+
+      let darkMode = false;
+
+      function updateTime() {
+        const options = {
+          timeZone: "America/New_York",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        timeDisplay.innerText = new Date().toLocaleTimeString("en-US", options);
+      }
+
+      setInterval(updateTime, 1000);
+      updateTime();
+
+      darkModeToggle.addEventListener("click", () => {
+        darkMode = !darkMode;
+        document.body.style.backgroundColor = darkMode ? "#2c3e50" : "#add8e6";
+        document.querySelector(".navbar").style.backgroundColor = darkMode
+          ? "#34495e"
+          : "rgba(255, 255, 255, 0.8)";
+        document.querySelector("footer").style.backgroundColor = darkMode
+          ? "#34495e"
+          : "rgba(255, 255, 255, 0.8)";
+        document.querySelector(".tabs").style.color = darkMode ? "#fff" : "#333";
+        document.querySelector("footer").style.color = darkMode ? "#fff" : "#333";
+        document.querySelector(".image-container .title").style.color = darkMode ? "#fff" : "#333";
+      });
+
+      // Open image in fullscreen with animation
+      day1Container.addEventListener("click", () => {
+        fullscreenImage.src = day1Container.querySelector("img").src;
+        fullscreenOverlay.style.display = "flex";
+        setTimeout(() => {
+          fullscreenOverlay.style.opacity = 1;
+        }, 10); // Delay for fade-in effect
+      });
+
+      day2Container.addEventListener("click", () => {
+        fullscreenImage.src = day2Container.querySelector("img").src;
+        fullscreenOverlay.style.display = "flex";
+        setTimeout(() => {
+          fullscreenOverlay.style.opacity = 1;
+        }, 10); // Delay for fade-in effect
+      });
+
+      // Close fullscreen with animation
+      closeFullscreen.addEventListener("click", () => {
+        fullscreenOverlay.style.opacity = 0;
+        setTimeout(() => {
+          fullscreenOverlay.style.display = "none";
+        }, 500); // Match the fade-out duration
+      });
+
+      // Right-click (Desktop) or press-and-hold (Mobile) to open in new tab
+      fullscreenImage.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        window.open(fullscreenImage.src, "_blank");
+      });
+
+      fullscreenImage.addEventListener("touchstart", (e) => {
+        let touchStart = e.timeStamp;
+        fullscreenImage.addEventListener("touchend", (e) => {
+          if (e.timeStamp - touchStart > 500) {
+            window.open(fullscreenImage.src, "_blank");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
