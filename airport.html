@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airport to Hotel Guide</title>
+    <!-- Correct Google Fonts Links -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pridi:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Bree Serif", serif;
+        font-size: 22px;
+        background-color: #add8e6;
+        color: #333;
+        transition: background-color 0.5s ease;
+      }
+
+      a {
+        font-family: "Bree Serif", serif;
+        font-size: 22px;
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .tabs {
+        display: flex;
+        gap: 15px;
+      }
+
+      .tab {
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        transition: background 0.3s ease;
+      }
+
+      .tab:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .active-tab {
+        background: #cce4f7;
+        font-weight: bold;
+      }
+
+      .container {
+        padding: 20px;
+        line-height: 1.6;
+        overflow-y: auto;
+        max-height: calc(100vh - 150px); /* Subtract space for navbar and footer */
+        scrollbar-width: thin; /* For modern browsers */
+        scrollbar-color: #555 #e0e0e0;
+      }
+
+      .container::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .container::-webkit-scrollbar-thumb {
+        background-color: #555;
+        border-radius: 5px;
+      }
+
+      .container::-webkit-scrollbar-track {
+        background: #e0e0e0;
+      }
+
+      h1 {
+        font-family: "Pridi", serif;
+        font-size: 2em;
+        margin-top: 0;
+      }
+
+      .steps {
+        margin-top: 20px;
+      }
+
+      .steps p {
+        margin: 10px 0;
+      }
+
+      footer {
+        width: 100%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+      }
+
+      .dark-mode {
+        margin-left: auto;
+        cursor: pointer;
+        font-size: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="time" id="time"></div>&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="tabs">
+        <a href="/airport.html" class="tab active-tab" id="airportTab">Airport</a>
+        <a href="/tours.html" class="tab" id="toursTab">Attraction/Tours</a>
+        <a href="/map.html" class="tab" id="mapTab">Map</a>
+      </div>
+      <div class="dark-mode" id="darkModeToggle">🌙</div>
+    </div>
+
+    <div class="container">
+      <h1>Travel Guide: Dulles Airport ✈️ to Arlo Hotel 🏨</h1>
+      <p>
+        Welcome! Here’s how to get from <strong>Washington Dulles International Airport (IAD)</strong> to the
+        <strong>Arlo Washington Hotel</strong>, which is located about 30 miles away
+        (~55–75 minutes). Follow this guide for both <em>driving</em> and <em>public transportation</em> options. 🚗🚇
+      </p>
+
+      <div class="steps">
+        <h2>🚇 Public Transportation:</h2>
+        <p>
+          1. From Dulles Airport, take the <strong>Silver Line Metro (Largo Town Center-bound)</strong>. The Metro station is directly connected to the terminal via the new Dulles AeroTrain. Follow signs for <strong>Metro</strong>.
+        </p>
+        <p>
+          2. Stay on the Silver Line and get off at <strong>Metro Center</strong>.
+        </p>
+        <p>
+          3. Transfer to the <strong>Red Line (Takoma-bound)</strong> and ride it to
+          <strong>Judiciary Square</strong>.
+        </p>
+        <p>
+          4. From Judiciary Square, it’s just a 7-minute walk (0.3 miles) to the Arlo Washington Hotel.
+        </p>
+        <p>
+          Use this <a href="https://godcgo.com/interactive-map/" target="_blank">interactive map</a> for step-by-step directions. 🗺️
+        </p>
+
+        <h2>🚗 Driving:</h2>
+        <p>
+          1. From Dulles, take the <strong>Dulles Access Road</strong> (VA-267 E) toward Washington, D.C.
+        </p>
+        <p>
+          2. Merge onto I-66 E and continue toward downtown D.C.
+        </p>
+        <p>
+          3. Exit at Constitution Ave NW, then use GPS to navigate to the Arlo Washington Hotel located at <strong>2233 Wisconsin Ave NW</strong>.
+        </p>
+        <p>
+          Parking options may be available nearby, so check with the hotel in advance. 🅿️
+        </p>
+      </div>
+    </div>
+
+    <footer>For 2025 Trip (c)</footer>
+
+    <script>
+      const timeDisplay = document.getElementById("time");
+      const darkModeToggle = document.getElementById("darkModeToggle");
+
+      let darkMode = false;
+
+      function updateTime() {
+        const options = {
+          timeZone: "America/New_York",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        timeDisplay.innerText = new Date().toLocaleTimeString("en-US", options);
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+
+      darkModeToggle.addEventListener("click", () => {
+        darkMode = !darkMode;
+        document.body.style.backgroundColor = darkMode ? "#2c3e50" : "#add8e6";
+        darkModeToggle.innerText = darkMode ? "☀️" : "🌙";
+        document.querySelector(".navbar").style.backgroundColor = darkMode
+          ? "#34495e"
+          : "rgba(255, 255, 255, 0.8)";
+        document.querySelector("footer").style.backgroundColor = darkMode
+          ? "#34495e"
+          : "rgba(255, 255, 255, 0.8)";
+      });
+    </script>
+  </body>
+</html>

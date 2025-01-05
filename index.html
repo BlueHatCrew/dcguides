@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DC Travel</title>
+    <!-- Correct Google Fonts Links -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pridi:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Bree Serif", serif; /* Main text font */
+        font-size: 22px;
+        background-color: #add8e6; /* Light blue color */
+        transition: background-color 0.5s ease;
+      }
+
+      a {
+        font-family: "Bree Serif", serif; /* Same font as body text */
+        font-size: 22px; /* Same size as body text */
+        color: inherit; /* Inherit color from the parent element */
+        text-decoration: none; /* Remove underline */
+        cursor: default; /* Change cursor to default */
+      }
+
+      a:hover {
+        text-decoration: none; /* Ensure no underline on hover */
+        color: inherit; /* Keep the color same on hover */
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        padding: 20px;
+        text-align: center;
+        transition: opacity 0.5s ease;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: background 0.5s ease;
+      }
+
+      .navbar h1 {
+        margin: 0;
+        font-family: "Pridi", serif; /* Title font */
+        font-size: 1.5em;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 15px;
+      }
+
+      .tab {
+        cursor: pointer;
+        padding: 12px 20px; /* Increased padding */
+        font-size: 1.1em; /* Increased font size */
+        border-radius: 8px; /* Adjusted border radius for balance */
+        transition: background 0.3s ease;
+      }
+
+      .tab:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .content {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .content.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .dark-mode {
+        margin-left: auto;
+        cursor: pointer;
+        font-size: 1.5em;
+        padding: 10px;
+      }
+
+      footer {
+        width: 100%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+      }
+
+      .bookmark-message {
+        margin-top: 20px;
+        font-size: 18px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+        opacity: 0;
+        transition: opacity 1s ease-out;
+      }
+
+      .bookmark-btn {
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .bookmark-btn:hover {
+        background-color: #2980b9;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          font-size: 18px;
+        }
+
+        .tabs {
+          display: block;
+          text-align: center;
+        }
+
+        .tab {
+          display: block;
+          margin: 10px 0;
+        }
+
+        .image-container img {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="time" id="time"></div>&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="tabs">
+        <a href="/airport.html" class="tab" id="airportTab">Airport</a>
+        <a href="/tours.html" class="tab" id="toursTab">Attraction/Tours</a>
+        <a href="/map.html" class="tab" id="mapTab">Map</a>
+      </div>
+      <div class="dark-mode" id="darkModeToggle">🌙</div>
+    </div>
+
+    <div class="container">
+      <div class="content active" id="mainPage">
+        <h1>Welcome to Your Travel Guide! 🌍</h1>
+        <p>Explore airports, attractions, and maps easily!</p>
+        <p>Use the tabs to navigate.</p>
+
+        <!-- Bookmark Button -->
+        <button class="bookmark-btn" id="bookmarkBtn">Bookmark This Page</button>
+        <!-- Instruction Message -->
+        <div class="bookmark-message" id="bookmarkMessage"></div>
+      </div>
+      <footer>For 2025 Trip (c)</footer>
+    </div>
+
+    <script>
+      const timeDisplay = document.getElementById("time");
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const contents = document.querySelectorAll(".content");
+      const airportTab = document.getElementById("airportTab");
+      const toursTab = document.getElementById("toursTab");
+      const mapTab = document.getElementById("mapTab");
+      const bookmarkMessage = document.getElementById("bookmarkMessage");
+      const bookmarkBtn = document.getElementById("bookmarkBtn");
+
+      let darkMode = false;
+
+      function updateTime() {
+        const options = {
+          timeZone: "America/New_York",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        timeDisplay.innerText = new Date().toLocaleTimeString("en-US", options);
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+
+      darkModeToggle.addEventListener("click", () => {
+        darkMode = !darkMode;
+        document.body.style.backgroundColor = darkMode ? "#2c3e50" : "#add8e6"; // Toggle background color
+        darkModeToggle.innerText = darkMode ? "☀️" : "🌙";
+        document.querySelector(".navbar").style.backgroundColor = darkMode
+          ? "#34495e"
+          : "rgba(255, 255, 255, 0.8)";
+        document.querySelector("footer").style.backgroundColor = darkMode
+          ? "#34495e"
+          : "rgba(255, 255, 255, 0.8)";
+      });
+
+      function showContent(id) {
+        contents.forEach((content) => {
+          content.classList.remove("active");
+        });
+        document.getElementById(id).classList.add("active");
+      }
+
+      airportTab.addEventListener("click", () => showContent("airportPage"));
+      toursTab.addEventListener("click", () => showContent("toursPage"));
+      mapTab.addEventListener("click", () => showContent("mapPage"));
+
+      // Detect browser and display bookmark instructions
+      const userAgent = navigator.userAgent.toLowerCase();
+      let bookmarkInstruction = "";
+
+      if (/mobile/i.test(userAgent)) {
+        bookmarkInstruction = "To bookmark this page on mobile, tap the share button and select 'Add to Home Screen'.";
+      } else if (/chrome|firefox|safari/i.test(userAgent)) {
+        bookmarkInstruction = "To bookmark this page, press Ctrl + D (Windows) or Cmd + D (Mac).";
+      } else {
+        bookmarkInstruction = "To bookmark this page, please check your browser's options.";
+      }
+
+      // Show bookmark message after button click
+      bookmarkBtn.addEventListener("click", () => {
+        bookmarkMessage.innerHTML = bookmarkInstruction;
+        bookmarkMessage.style.display = "block";
+        bookmarkMessage.style.opacity = 1; // Fade in
+
+        // After 11 seconds, fade out and hide the message
+        setTimeout(() => {
+          bookmarkMessage.style.opacity = 0; // Fade out
+          setTimeout(() => {
+            bookmarkMessage.style.display = "none"; // Hide after fade-out
+          }, 1000); // Allow fade-out animation to complete
+        }, 11000); // Wait for 11 seconds
+      });
+    </script>
+  </body>
+</html>
